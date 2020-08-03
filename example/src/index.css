@@ -16,3 +16,7 @@ code {
 		width: 100vw;
 		padding: 5rem 0rem;
 }
+
+.App .MuiCard-root {
+	overflow: unset;
+}

@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Toolbar, { getHandlers } from './Toolbar';
 
@@ -54,16 +55,16 @@ export default props => {
 		const html = doc.body.innerHTML;
 		props.output(html);
 	};
-    return(
-        <div className="text-editor">
-            <Toolbar />
-            <ReactQuill
-                onChange={handleChange}
-                modules={modules}
-                // formats={formats}
-                theme="snow" // pass false to use minimal theme
-								onBlur={saveData}
-            />
-        </div>
-    );
+
+	return(
+			<div className="text-editor">
+					<Toolbar saveData={saveData} />
+					<ReactQuill
+							onChange={handleChange}
+							modules={modules}
+							// formats={formats}
+							theme="snow" // pass false to use minimal theme
+					/>
+			</div>
+	);
 }

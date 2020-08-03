@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import styles from './styles.module.css';
 import MuiEditor from './components/MuiEditor';
@@ -72,7 +73,6 @@ const useStyles = makeStyles({
 						minWidth: 0,
 						marginTop: '4px',
 						marginBottom: '4px',
-						paddingLeft: '16px',
 						paddingRight: '16px',
 						width: '100%',
 						display: 'flex',
@@ -84,7 +84,6 @@ const useStyles = makeStyles({
 						paddingBottom: '8px',
 						justifyContent: 'flex-start',
 						textDecoration: 'none',
-						display: 'block',
 						fontSize: '1rem',
 						fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
 						fontWeight: 400,
@@ -116,8 +115,8 @@ const Editor = props => {
 				background: 'transparent'
 		} : {};
 
-		const output = props.output || function(content) {
-			console.warn('Please set up an output function to save user content', content);
+		const output = props.output || function(data) {
+			console.warn('Please set up an output function to save user content', data);
 		};
 
     return (

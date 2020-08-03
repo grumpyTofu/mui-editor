@@ -1,0 +1,17 @@
+.toolbarButtons {
+  display: flex;
+}
+
+.saveButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.iconButton {
+  display: flex !important;
+  color: #444 !important;
+}
+
+.iconButton:hover {
+  color: #06c !important;
+}
