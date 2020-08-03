@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Toolbar, { getHandlers } from './Toolbar';
@@ -16,7 +16,7 @@ const modules = {
 };
 
 export default props => {
-  const [editorHtml, setEditorHtml] = useState("");
+  const [editorHtml, setEditorHtml] = useState(props.data);
 	const handleChange = html => setEditorHtml(html);
 	const saveData = () => {
 		var doc = new DOMParser().parseFromString(editorHtml, "text/html");
@@ -64,6 +64,7 @@ export default props => {
 							modules={modules}
 							// formats={formats}
 							theme="snow" // pass false to use minimal theme
+							value={editorHtml}
 					/>
 			</div>
 	);

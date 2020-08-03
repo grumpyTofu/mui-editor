@@ -6,7 +6,7 @@ import React from 'react';
 import { Tooltip, IconButton, Grid } from '@material-ui/core';
 // import { StarIcon } from '@primer/octicons-react';
 import SaveIcon from '@material-ui/icons/Save';
-import styles from './toolbar.css';
+import styles from './toolbar.module.css';
 
 
 // Todo: fix insertStart function - 'error quill is not found'
@@ -31,7 +31,7 @@ export const getHandlers = () => {
 export default props => (
     <div id="toolbar">
       <Grid container>
-        <Grid item xs={10} className={styles.toolbarButtons}>
+        <Grid item xs={12} sm={11} className={styles.toolbarButtons}>
           <span className="ql-formats">
               <select className="ql-header" defaultValue="" onChange={e => e.persist()}>
                   <option value="1" />
@@ -81,7 +81,7 @@ export default props => (
               <Tooltip title="Bold" arrow><button className="ql-clean" /></Tooltip>
           </span>
         </Grid>
-        <Grid item xs={2} className={styles.saveButton}>
+        <Grid item xs={12} sm={1} className={styles.saveButton}>
           <span className="ql-formats">
               <Tooltip title="Save" arrow><IconButton className={styles.iconButton} onClick={() => props.saveData()}><SaveIcon /></IconButton></Tooltip>
           </span>

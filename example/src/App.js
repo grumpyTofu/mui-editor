@@ -10,7 +10,7 @@ const App = () => {
 					<Grid item xs={10}>
 						<Card className='card'>
 							<CardContent>
-								<Editor transparent output={data => console.log(data)} />
+								<Editor transparent data="<p>testing</p>" output={data => console.log(data)} />
 							</CardContent>
 						</Card>
 					</Grid>

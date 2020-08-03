@@ -1,5 +1,6 @@
 .toolbarButtons {
-  display: flex;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .saveButton {

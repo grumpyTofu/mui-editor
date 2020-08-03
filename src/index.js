@@ -119,9 +119,11 @@ const Editor = props => {
 			console.warn('Please set up an output function to save user content', data);
 		};
 
+		const data = props.data || "";
+
     return (
 				<div className={classes.editorContainer} style={condStyles}>
-            <MuiEditor output={output} />
+            <MuiEditor output={output} data={data} />
         </div>
     );
 }
