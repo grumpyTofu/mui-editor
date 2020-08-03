@@ -1,28 +1,32 @@
 # mui-editor
 
-> Made with create-react-library
+> A rich text editor built on quill.js for Material-UI design framework
 
 [![NPM](https://img.shields.io/npm/v/mui-editor.svg)](https://www.npmjs.com/package/mui-editor) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save mui-editor
+npm install mui-editor
+```
+or
+```bash
+yarn add mui-editor
 ```
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react';
 
-import MyComponent from 'mui-editor'
-import 'mui-editor/dist/index.css'
+import Editor from 'mui-editor';
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+export default props => {
+	return(
+		<Editor transparent output={data => console.log(data)} />
+	);
 }
+
 ```
 
 ## License
