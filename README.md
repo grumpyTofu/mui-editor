@@ -7,11 +7,11 @@
 ## Install
 
 ```bash
-npm install mui-editor
+npm install mui-editor @material-ui/core@4.11.0 @material-ui/icons react-quill@1.3.5
 ```
 or
 ```bash
-yarn add mui-editor
+yarn add mui-editor @material-ui/core@4.11.0 @material-ui/icons react-quill@1.3.5
 ```
 
 ## Usage
