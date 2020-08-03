@@ -53,7 +53,7 @@ export default props => (
         </span>
         <span className="ql-formats">
             <Tooltip title="Quote" arrow><button className="ql-blockquote" /></Tooltip>
-            <Tooltip title="Code" arrow><button className="ql-code-block" /></Tooltip>
+            {/* <Tooltip title="Code" arrow><button className="ql-code-block" /></Tooltip> */}
         </span>
         <span className="ql-formats">
             <Tooltip title="Ordered list" arrow><button className="ql-list" value="ordered"/></Tooltip>
