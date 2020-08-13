@@ -3,6 +3,11 @@ import { image } from './defaultImage';
 
 export default props => {
 	return (
-		<img src={props.img || image} width='100%' height='auto' style={{ maxHeight: '100%' }} />
+		<img
+			src={props.img || image}
+			width='100%'
+			height='auto'
+			style={{ maxHeight: '100%', marginBottom: '1.5rem' }}
+		/>
 	);
-}
+};

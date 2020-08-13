@@ -1,7 +1,5 @@
 import React from 'react';
 
 export default props => {
-	return (
-		<div>Collection</div>
-	);
-}
+	return <div>Collection</div>;
+};

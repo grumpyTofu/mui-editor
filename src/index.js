@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import TextEditor from './components/TextEditor';
-import LayoutEditor from './components/LayoutEditor';
 
 const MuiEditor = props => {
 
@@ -20,4 +19,4 @@ const MuiEditor = props => {
 
 export default MuiEditor;
 
-export { LayoutEditor };
+export { default as LayoutEditor } from './components/LayoutEditor';

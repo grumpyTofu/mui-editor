@@ -4,7 +4,10 @@
     "semi": true,
     "tabWidth": 4,
     "bracketSpacing": true,
-    "jsxBracketSameLine": true,
-    "arrowParens": "avoid",
-    "trailingComma": "none"
+    "jsxBracketSameLine": false,
+		"arrowParens": "avoid",
+		"trailingComma": "es5",
+		"htmlWhitespaceSensitivity": "ignore",
+		"endOfLine": "auto",
+		"proseWrap": "always"
 }
