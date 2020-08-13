@@ -8,17 +8,8 @@ import {
 	DialogTitle,
 	TextField,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() => ({
-	Button: {
-		pointerEvents: 'none',
-	},
-}));
 
 export default props => {
-	const classes = useStyles();
-
 	const [state, setState] = useState({
 		editing: true,
 		open: false,
@@ -41,7 +32,6 @@ export default props => {
 			}}
 		>
 			<Button
-				className={classes.Button}
 				color='primary'
 				size='small'
 				variant='outlined'

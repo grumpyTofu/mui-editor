@@ -95,7 +95,6 @@ export default props => {
 							id='contentTypeWrapper'
 							onMouseOver={() => setToolbar(section.id)}
 							onMouseOut={() => setToolbar(null)}
-							style={{ width: 'inherit', height: 'inherit' }}
 							key={`contentItemWrapper_${section.id}`}
 						>
 							<Grid container>
@@ -108,6 +107,7 @@ export default props => {
 										contentTypes[section.type],
 										{
 											key: `${section.type}_${section.id}`,
+											active: section.id === toolbar,
 										}
 									)}
 								</Grid>
