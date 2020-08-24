@@ -2,18 +2,35 @@ import React, { useState } from 'react';
 import Editor from '../../TextEditor';
 
 export default props => {
-	const active = props.active;
-	const [html, setHtml] = useState('<div>Add Some Content</div>');
+
+	const [state, setState] = useState({
+		html: '<div>Add Some Content</div>',
+		editing: false
+	});
+
+	const handleOutput = data => {
+		setState({
+			...state,
+			html: data,
+			editing: false
+		});
+	}
+
 	return (
 		<React.Fragment>
-			{active ?
+			{state.editing ?
 				<Editor
 					transparent
-					data={html}
-					output={data => setHtml(data)}
+					modern
+					data={state.html}
+					output={data => handleOutput(data)}
 				/>
 			:
-				<div dangerouslySetInnerHTML={{ __html: html }}></div>
+				<div
+					dangerouslySetInnerHTML={{ __html: state.html }}
+					onMouseOver={() => setState({ ...state, editing: true })}
+				>
+				</div>
 			}
 		</React.Fragment>
 	);

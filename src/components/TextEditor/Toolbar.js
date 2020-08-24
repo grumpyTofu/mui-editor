@@ -28,10 +28,12 @@ export const getHandlers = () => {
     return handlers;
 }
 
-export default props => (
-    <div id="toolbar">
+export default props => {
+	const modern = props.modern || false;
+	return (
+		<div id="toolbar">
       <Grid container>
-        <Grid item xs={12} sm={11} className={styles.toolbarButtons}>
+        <Grid item xs={12} sm={modern ? 12 : 11} className={styles.toolbarButtons}>
           <span className="ql-formats">
               <select className="ql-header" defaultValue="" onChange={e => e.persist()}>
                   <option value="1" />
@@ -81,11 +83,14 @@ export default props => (
               <Tooltip title="Bold" arrow><button className="ql-clean" /></Tooltip>
           </span>
         </Grid>
-        <Grid item xs={12} sm={1} className={styles.saveButton}>
-          <span className="ql-formats">
-              <Tooltip title="Save" arrow><IconButton className={styles.iconButton} onClick={() => props.saveData()}><SaveIcon /></IconButton></Tooltip>
-          </span>
-        </Grid>
+				{!modern &&
+					<Grid item xs={12} sm={1} className={styles.saveButton}>
+						<span className="ql-formats">
+								<Tooltip title="Save" arrow><IconButton className={styles.iconButton} onClick={() => props.saveData()}><SaveIcon /></IconButton></Tooltip>
+						</span>
+					</Grid>
+				}
       </Grid>
     </div>
-);
+	);
+}

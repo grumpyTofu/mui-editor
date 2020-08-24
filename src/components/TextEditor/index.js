@@ -120,6 +120,8 @@ const useStyles = makeStyles({
 export default props => {
 	const classes = useStyles();
 
+	const modern = props.modern || false;
+
 	const condStyles = props.transparent === true ? {
 			background: 'transparent'
 	} : {};
@@ -166,16 +168,22 @@ export default props => {
 		props.output(html);
 	};
 
+	const editorProps = modern ? { onBlur: () => {
+		saveData();
+	} } : {};
+	const toolbarProps = modern ? { modern: modern } : { saveData: saveData() }
+
 	return(
 		<div className={classes.editorContainer} style={condStyles}>
 			<div className="text-editor">
-					<Toolbar saveData={saveData} />
+					<Toolbar { ...toolbarProps } />
 					<ReactQuill
 							onChange={handleChange}
 							modules={modules}
 							// formats={formats}
 							theme="snow" // pass false to use minimal theme
 							value={editorHtml}
+							{ ...editorProps }
 					/>
 			</div>
 		</div>
