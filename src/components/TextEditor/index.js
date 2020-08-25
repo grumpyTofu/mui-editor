@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import Toolbar, { getHandlers } from './Toolbar';
+import Toolbar from './Toolbar';
+// { getHandlers } from './Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
 
 const modules = {

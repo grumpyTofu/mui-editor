@@ -16,25 +16,21 @@ const useStyles = makeStyles({
 			display: 'flex',
 			justifyContent: 'flex-end',
 			alignItems: 'center',
-			padding: '0 1rem'
+			padding: '0 1rem',
 		},
 		'& .MuiIconButton-root': {
 			padding: '2px',
 		},
 		'& button': {
-			margin: '0 .5rem'
-		}
+			margin: '0 .5rem',
+		},
 	},
 });
 
+const customEditTypes = ['text', 'hero'];
+
 export default props => {
-	const {
-		active,
-		setEditing,
-		deleteSection,
-		updateSection,
-		section
-	} = props;
+	const { active, setEditing, deleteSection, updateSection, section } = props;
 
 	const classes = useStyles();
 	return (
@@ -58,7 +54,7 @@ export default props => {
 				>
 					<KeyboardArrowDownIcon />
 				</IconButton>
-				{section.type === 'text' &&
+				{customEditTypes.includes(section.type) && (
 					<IconButton
 						onClick={() => {
 							setEditing(section.id);
@@ -66,7 +62,7 @@ export default props => {
 					>
 						<EditIcon />
 					</IconButton>
-				}
+				)}
 				<IconButton onClick={() => deleteSection(section.id)}>
 					<DeleteIcon />
 				</IconButton>

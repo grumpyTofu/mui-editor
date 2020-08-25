@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import Selector from './Selector';
 import Toolbar from './Toolbar';
@@ -27,6 +27,17 @@ const contentTypes = {
 };
 
 export default props => {
+	const output =
+		props.output ||
+		function (output) {
+			console.warn('Please set up an output function.', output);
+		};
+
+	const saveData = () => {
+		var content = document.getElementById('mui-layout-editor').innerHTML;
+		output(content);
+	};
+
 	const [state, setState] = useState({
 		sectionIdCount: 0,
 		sections: [],
@@ -88,7 +99,7 @@ export default props => {
 
 	return (
 		<React.Fragment>
-			<Grid container id='editor'>
+			<Grid container id='mui-layout-editor'>
 				{state.sections.length > 0 &&
 					state.sections.map(section => (
 						<Grid
@@ -114,17 +125,13 @@ export default props => {
 										key={`Toolbar_${section.id}`}
 									/>
 								</Grid>
-								<Grid
-									item
-									xs={12}
-									key={`Grid_${section.id}`}
-								>
+								<Grid item xs={12} key={`Grid_${section.id}`}>
 									{React.cloneElement(
 										contentTypes[section.type],
 										{
 											key: `${section.type}_${section.id}`,
 											editing: section.id === editing,
-											setEditing: setEditing
+											setEditing: setEditing,
 										}
 									)}
 								</Grid>
@@ -135,6 +142,7 @@ export default props => {
 			<Selector
 				contentTypes={contentTypes}
 				createSection={createSection}
+				saveData={saveData}
 			/>
 		</React.Fragment>
 	);
