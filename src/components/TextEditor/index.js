@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const modules = {
     toolbar: {
         container: "#toolbar",
-        handlers: getHandlers(),
+        // handlers: getHandlers(),
     },
     clipboard: {
         matchVisual: false,

@@ -3,7 +3,7 @@ import { Grid, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-
+import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -14,17 +14,28 @@ const useStyles = makeStyles({
 		},
 		'& .MuiGrid-item': {
 			display: 'flex',
-			justifyContent: 'center',
+			justifyContent: 'flex-end',
 			alignItems: 'center',
+			padding: '0 1rem'
 		},
 		'& .MuiIconButton-root': {
 			padding: '2px',
 		},
+		'& button': {
+			margin: '0 .5rem'
+		}
 	},
 });
 
 export default props => {
-	const { active, deleteSection, updateSection, section } = props;
+	const {
+		active,
+		setEditing,
+		deleteSection,
+		updateSection,
+		section
+	} = props;
+
 	const classes = useStyles();
 	return (
 		<Grid
@@ -40,8 +51,6 @@ export default props => {
 				>
 					<KeyboardArrowUpIcon />
 				</IconButton>
-			</Grid>
-			<Grid item xs={12}>
 				<IconButton
 					onClick={() => {
 						updateSection(section.id, section.pageOrder + 1);
@@ -49,8 +58,15 @@ export default props => {
 				>
 					<KeyboardArrowDownIcon />
 				</IconButton>
-			</Grid>
-			<Grid item xs={12}>
+				{section.type === 'text' &&
+					<IconButton
+						onClick={() => {
+							setEditing(section.id);
+						}}
+					>
+						<EditIcon />
+					</IconButton>
+				}
 				<IconButton onClick={() => deleteSection(section.id)}>
 					<DeleteIcon />
 				</IconButton>

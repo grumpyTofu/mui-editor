@@ -84,6 +84,8 @@ export default props => {
 
 	const [toolbar, setToolbar] = useState(null);
 
+	const [editing, setEditing] = useState(null);
+
 	return (
 		<React.Fragment>
 			<Grid container id='editor'>
@@ -100,29 +102,31 @@ export default props => {
 							<Grid container>
 								<Grid
 									item
-									xs={toolbar === section.id ? 11 : 12}
-									key={`Grid_${section.id}`}
-								>
-									{React.cloneElement(
-										contentTypes[section.type],
-										{
-											key: `${section.type}_${section.id}`,
-											active: section.id === toolbar,
-										}
-									)}
-								</Grid>
-								<Grid
-									item
-									xs={1}
+									xs={12}
 									key={`ToolbarWrapper_${section.id}`}
 								>
 									<Toolbar
 										active={toolbar === section.id}
 										deleteSection={deleteSection}
 										updateSection={updateSection}
+										setEditing={setEditing}
 										section={section}
 										key={`Toolbar_${section.id}`}
 									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+									key={`Grid_${section.id}`}
+								>
+									{React.cloneElement(
+										contentTypes[section.type],
+										{
+											key: `${section.type}_${section.id}`,
+											editing: section.id === editing,
+											setEditing: setEditing
+										}
+									)}
 								</Grid>
 							</Grid>
 						</Grid>

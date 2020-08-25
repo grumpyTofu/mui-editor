@@ -1,39 +1,56 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable prefer-const */
 import React from 'react';
-// { createRef, useRef } from 'react';
-
 import { Tooltip, IconButton, Grid } from '@material-ui/core';
-// import { StarIcon } from '@primer/octicons-react';
 import SaveIcon from '@material-ui/icons/Save';
-import styles from './toolbar.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles({
+	toolbarButtons: {
+		display: 'flex',
+		justifyContent: 'flex-start'
+	},
+	saveButton: {
+		display: 'flex',
+		justifyContent: 'flex-end'
+	},
+	iconButton: {
+		display: 'flex !important',
+		color: '#444 !important',
+		'&:hover': {
+			color: '#06c !important'
+		}
+	}
+});
 
 
 // Todo: fix insertStart function - 'error quill is not found'
-const insertStar = () => {
-    const cursorPosition = this.quill.getSelection().index;
-    this.quill.insertText(cursorPosition, "★");
-    this.quill.setSelection(cursorPosition + 1);
-}
+// const insertStar = () => {
+//     const cursorPosition = this.quill.getSelection().index;
+//     this.quill.insertText(cursorPosition, "★");
+//     this.quill.setSelection(cursorPosition + 1);
+// }
 
-const toolbarHandlers = [
-    { name: 'insertStar', function: insertStar }
-];
+// const toolbarHandlers = [
+//     { name: 'insertStar', function: insertStar }
+// ];
 
-export const getHandlers = () => {
-    let handlers = {};
-    for(const handler of toolbarHandlers) {
-      handlers[handler.name] = handler.function;
-    }
-    return handlers;
-}
+// export const getHandlers = () => {
+//     let handlers = {};
+//     for(const handler of toolbarHandlers) {
+//       handlers[handler.name] = handler.function;
+//     }
+//     return handlers;
+// }
 
 export default props => {
 	const modern = props.modern || false;
+	const classes = useStyles();
 	return (
 		<div id="toolbar">
       <Grid container>
-        <Grid item xs={12} sm={modern ? 12 : 11} className={styles.toolbarButtons}>
+        <Grid item xs={12} sm={modern ? 12 : 11} className={classes.toolbarButtons}>
           <span className="ql-formats">
               <select className="ql-header" defaultValue="" onChange={e => e.persist()}>
                   <option value="1" />
@@ -84,9 +101,16 @@ export default props => {
           </span>
         </Grid>
 				{!modern &&
-					<Grid item xs={12} sm={1} className={styles.saveButton}>
+					<Grid item xs={12} sm={1} className={classes.saveButton}>
 						<span className="ql-formats">
-								<Tooltip title="Save" arrow><IconButton className={styles.iconButton} onClick={() => props.saveData()}><SaveIcon /></IconButton></Tooltip>
+								<Tooltip title="Save" arrow>
+									<IconButton
+										className={classes.iconButton}
+										onClick={() => props.saveData()}
+									>
+										<SaveIcon />
+									</IconButton>
+								</Tooltip>
 						</span>
 					</Grid>
 				}
