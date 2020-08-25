@@ -15,15 +15,15 @@ import {
 } from './ContentTypes';
 
 const contentTypes = {
-	hero: <Hero />,
-	title: <Title />,
-	text: <Text />,
-	button: <Button />,
-	collection: <Collection />,
-	collectionItem: <CollectionItem />,
-	dialog: <Dialog />,
-	section: <Section />,
-	gridItem: <GridItem />,
+	'Hero': <Hero />,
+	'Title': <Title />,
+	'Text': <Text />,
+	'Button': <Button />,
+	// collection: <Collection />,
+	'Collection Item': <CollectionItem />,
+	// dialog: <Dialog />,
+	// section: <Section />,
+	// gridItem: <GridItem />,
 };
 
 export default props => {

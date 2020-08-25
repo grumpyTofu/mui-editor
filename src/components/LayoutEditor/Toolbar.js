@@ -54,15 +54,13 @@ export default props => {
 				>
 					<KeyboardArrowDownIcon />
 				</IconButton>
-				{customEditTypes.includes(section.type) && (
-					<IconButton
-						onClick={() => {
-							setEditing(section.id);
-						}}
-					>
-						<EditIcon />
-					</IconButton>
-				)}
+				<IconButton
+					onClick={() => {
+						setEditing(section.id);
+					}}
+				>
+					<EditIcon />
+				</IconButton>
 				<IconButton onClick={() => deleteSection(section.id)}>
 					<DeleteIcon />
 				</IconButton>

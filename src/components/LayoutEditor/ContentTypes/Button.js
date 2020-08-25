@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogContentText,
-	DialogTitle,
-	TextField,
-} from '@material-ui/core';
+import { Button, DialogContentText, TextField } from '@material-ui/core';
+import EditDialog from '../EditDialog';
 
 export default props => {
-	const [state, setState] = useState({
-		editing: true,
-		open: false,
-		link: '',
-		buttonText: 'Click Here',
-	});
 
-	const [buttonText, setButtonText] = useState(state.buttonText);
-	const [buttonLink, setButtonLink] = useState(state.link);
+	const { editing, setEditing } = props;
+
+	const [buttonText, setButtonText] = useState('Click Here');
+	const [buttonLink, setButtonLink] = useState('');
 
 	return (
 		<div
@@ -36,71 +25,38 @@ export default props => {
 				size='small'
 				variant='outlined'
 				component='a'
-				href={state.link}
+				href={buttonLink}
 				onClick={event => {
 					event.preventDefault();
-					setState({ ...state, open: true });
 				}}
-				onMouseEnter={() => setState({ ...state, editing: true })}
-				onMouseOut={() => setState({ ...state, editing: false })}
-				{...props}
 			>
-				{state.buttonText}
+				{buttonText}
 			</Button>
-			<Dialog
-				open={state.open}
-				onClose={() =>
-					setState({ ...state, editing: false, open: false })
-				}
-				aria-labelledby='form-dialog-title'
+			<EditDialog
+				editing={editing}
+				setEditing={setEditing}
+				title='Update Button'
 			>
-				<DialogTitle id='form-dialog-title'>Update Button</DialogTitle>
-				<DialogContent>
-					<DialogContentText>
-						Enter a link and display text for the button below.
-					</DialogContentText>
-					<TextField
-						autoFocus
-						margin='dense'
-						label='Button Text'
-						defaultValue={buttonText}
-						fullWidth
-						onChange={event => setButtonText(event.target.value)}
-					/>
-					<TextField
-						autoFocus
-						margin='dense'
-						label='Link'
-						fullWidth
-						defaultValue={buttonLink}
-						onChange={event => setButtonLink(event.target.value)}
-					/>
-				</DialogContent>
-				<DialogActions>
-					<Button
-						onClick={() =>
-							setState({ ...state, editing: false, open: false })
-						}
-						color='primary'
-					>
-						Cancel
-					</Button>
-					<Button
-						onClick={() =>
-							setState({
-								...state,
-								editing: false,
-								open: false,
-								buttonText: buttonText,
-								link: buttonLink,
-							})
-						}
-						color='primary'
-					>
-						Save
-					</Button>
-				</DialogActions>
-			</Dialog>
+				<DialogContentText>
+					Enter display text and a link for the button below.
+				</DialogContentText>
+				<TextField
+					autoFocus
+					margin='dense'
+					label='Button Text'
+					defaultValue={buttonText}
+					fullWidth
+					onChange={event => setButtonText(event.target.value)}
+				/>
+				<TextField
+					autoFocus
+					margin='dense'
+					label='Link'
+					fullWidth
+					defaultValue={buttonLink}
+					onChange={event => setButtonLink(event.target.value)}
+				/>
+			</EditDialog>
 		</div>
 	);
 };
