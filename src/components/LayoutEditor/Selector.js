@@ -60,7 +60,8 @@ export default props => {
 	}
 
 	const updateMousePosition = ev => {
-		var rect = document.getElementById('mui-layout-editor').getBoundingClientRect();
+		var rect = Boolean(state.anchorEl) ? state.anchorEl.getBoundingClientRect() : document.getElementById('mui-layout-editor').getBoundingClientRect();
+		if (Boolean(state.anchorEl)) console.log(rect);
 		if (ev.clientX > rect.right || ev.clientX < rect.left || ev.clientY > rect.bottom || ev.clientY < rect.top) {
 			setState({
 				...state,
@@ -110,6 +111,7 @@ export default props => {
 					>
 						<AddIcon />
 					</Fab>
+					{/* Menu disappears, switch to List and show options conditionally when clicking Add Section */}
 					<Menu
 						id='simple-menu'
 						anchorEl={state.anchorEl}
