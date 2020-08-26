@@ -172,7 +172,10 @@ export default props => {
 	const editorProps = modern ? { onBlur: () => {
 		saveData();
 	} } : {};
-	const toolbarProps = modern ? { modern: modern } : { saveData: saveData() }
+
+	const toolbarProps = modern ? { modern: modern } : { saveData: () => {
+		saveData();
+	}};
 
 	return(
 		<div className={classes.editorContainer} style={condStyles}>

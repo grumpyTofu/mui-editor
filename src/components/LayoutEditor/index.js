@@ -29,13 +29,13 @@ const contentTypes = {
 export default props => {
 	const output =
 		props.output ||
-		function (output) {
-			console.warn('Please set up an output function.', output);
+		function (outputHtml, outputEditorConfig) {
+			console.warn('Please set up an output function.', outputHtml, outputEditorConfig);
 		};
 
 	const saveData = () => {
 		var content = document.getElementById('mui-layout-editor').innerHTML;
-		output(content);
+		output(content, state.sections);
 	};
 
 	const [state, setState] = useState({

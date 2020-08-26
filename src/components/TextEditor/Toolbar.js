@@ -97,7 +97,7 @@ export default props => {
               <Tooltip title="Star" arrow><button className="ql-insertStar"><StarIcon /></button></Tooltip>
           </span> */}
           <span className="ql-formats">
-              <Tooltip title="Bold" arrow><button className="ql-clean" /></Tooltip>
+              <Tooltip title="Clear Formats" arrow><button className="ql-clean" /></Tooltip>
           </span>
         </Grid>
 				{!modern &&

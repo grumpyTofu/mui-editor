@@ -1,57 +1,43 @@
 import React, { useState } from 'react';
-import { Typography, Divider, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+	Typography,
+	Divider,
+	TextField,
+	DialogContentText
+} from '@material-ui/core';
+import EditDialog from '../EditDialog';
 
-const useStyles = makeStyles(() => ({
-	TextField: {
-		'& .MuiInput-underline:before': {
-			borderBottom: 'none',
-		},
-		'& .MuiInput-underline:after': {
-			borderBottom: 'none',
-		},
-		'& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-			borderBottom: 'none',
-		},
-		'& input.MuiInputBase-input.MuiInput-input': {
-			margin: 0,
-			marginBottom: '0.35em',
-			fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-			fontSize: '2.125rem',
-			fontWeight: 400,
-			lineHeight: 1.235,
-			letterSpacing: '0.00735em',
-			textAlign: 'center',
-			padding: 0,
-		},
-	},
-}));
 
 export default props => {
-	const classes = useStyles();
+
+	const { editing, setEditing } = props;
 	const [value, setValue] = useState('Title Text');
-	const [editing, setEditing] = useState(false);
+
 	return (
-		<div style={{ marginBottom: '1.5rem' }}>
-			{editing ? (
-				<TextField
-					className={classes.TextField}
-					defaultValue={value}
-					onBlur={() => setEditing(false)}
-					onChange={event => setValue(event.target.value)}
-				/>
-			) : (
-				<Typography
-					variant='h4'
-					gutterBottom
-					onMouseOver={() => setEditing(true)}
-				>
+		<React.Fragment>
+			<div style={{ marginBottom: '1.5rem' }}>
+				<Typography variant='h4'gutterBottom>
 					{value}
 				</Typography>
-			)}
-			<div style={{ width: '25%' }}>
-				<Divider style={{ height: '2px', backgroundColor: 'orange' }} />
+				<div style={{ width: '25%' }}>
+					<Divider style={{ height: '2px', backgroundColor: 'orange' }} />
+				</div>
 			</div>
-		</div>
+			{editing &&
+				<EditDialog
+					editing={editing}
+					setEditing={setEditing}
+					title='Update Title'
+				>
+					<DialogContentText>
+						Please update the title text below
+					</DialogContentText>
+					<TextField
+						defaultValue={value}
+						onChange={event => setValue(event.target.value)}
+					/>
+				</EditDialog>
+			}
+		</React.Fragment>
 	);
 };

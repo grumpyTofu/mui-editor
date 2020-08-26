@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 		},
 		'& .MuiGrid-item': {
 			display: 'flex',
-			justifyContent: 'flex-end',
+			justifyContent: 'flex-start',
 			alignItems: 'center',
 			padding: '0 1rem',
 		},
@@ -26,8 +26,6 @@ const useStyles = makeStyles({
 		},
 	},
 });
-
-const customEditTypes = ['text', 'hero'];
 
 export default props => {
 	const { active, setEditing, deleteSection, updateSection, section } = props;

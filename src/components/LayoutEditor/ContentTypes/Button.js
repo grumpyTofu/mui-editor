@@ -26,6 +26,8 @@ export default props => {
 				variant='outlined'
 				component='a'
 				href={buttonLink}
+				target='_blank'
+				rel='noreferrer noopener'
 				onClick={event => {
 					event.preventDefault();
 				}}
