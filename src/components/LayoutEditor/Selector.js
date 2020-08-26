@@ -13,9 +13,7 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-export default props => {
-	const { contentTypes, createSection, saveData } = props;
-
+export default ({ contentTypes, createSection, saveData }) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -35,18 +33,10 @@ export default props => {
 	return (
 		<Card elevation={0} className={classes.card}>
 			<CardActions>
-				<Fab
-					color='primary'
-					aria-label='Add Section'
-					onClick={saveData}
-				>
+				<Fab color='primary' aria-label='Add Section' onClick={saveData}>
 					<SaveIcon />
 				</Fab>
-				<Fab
-					color='secondary'
-					aria-label='Add Section'
-					onClick={handleClick}
-				>
+				<Fab color='secondary' aria-label='Add Section' onClick={handleClick}>
 					<AddIcon />
 				</Fab>
 			</CardActions>
@@ -58,10 +48,7 @@ export default props => {
 				onClose={handleClose}
 			>
 				{Object.keys(contentTypes).map(key => (
-					<MenuItem
-						onClick={() => handleSelect(key)}
-						key={`MenuItem_${key}`}
-					>
+					<MenuItem onClick={() => handleSelect(key)} key={`MenuItem_${key}`}>
 						{key}
 					</MenuItem>
 				))}

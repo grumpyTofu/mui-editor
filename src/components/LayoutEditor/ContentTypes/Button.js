@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import { Button, DialogContentText, TextField } from '@material-ui/core';
 import EditDialog from '../EditDialog';
 
-export default props => {
-
-	const { editing, setEditing } = props;
-
-	const [buttonText, setButtonText] = useState('Click Here');
-	const [buttonLink, setButtonLink] = useState('');
-
+export default ({ editing, setEditing, text, link }) => {
+	const [buttonText, setButtonText] = useState(text || 'Click Here');
+	const [buttonLink, setButtonLink] = useState(link || '');
 	return (
 		<div
 			style={{
@@ -34,11 +30,7 @@ export default props => {
 			>
 				{buttonText}
 			</Button>
-			<EditDialog
-				editing={editing}
-				setEditing={setEditing}
-				title='Update Button'
-			>
+			<EditDialog editing={editing} setEditing={setEditing} title='Update Button'>
 				<DialogContentText>
 					Enter display text and a link for the button below.
 				</DialogContentText>

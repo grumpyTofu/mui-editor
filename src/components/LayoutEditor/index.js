@@ -4,23 +4,51 @@ import Selector from './Selector';
 import Toolbar from './Toolbar';
 import {
 	Hero,
-	Collection,
+	// Collection,
 	CollectionItem,
-	Dialog,
+	// Dialog,
 	Button,
-	GridItem,
-	Section,
+	// GridItem,
+	// Section,
 	Text,
 	Title,
 } from './ContentTypes';
 
 const contentTypes = {
-	'Hero': <Hero />,
-	'Title': <Title />,
-	'Text': <Text />,
-	'Button': <Button />,
+	Hero: {
+		component: <Hero />,
+		props: {
+			image: null,
+		},
+	},
+	Title: {
+		component: <Title />,
+		props: {
+			text: null,
+		},
+	},
+	Text: {
+		component: <Text />,
+		props: {
+			html: null,
+		},
+	},
+	Button: {
+		component: <Button />,
+		props: {
+			text: null,
+			link: null,
+		},
+	},
 	// collection: <Collection />,
-	'Collection Item': <CollectionItem />,
+	'Collection Item': {
+		component: <CollectionItem />,
+		props: {
+			primary: null,
+			secondary: null,
+			link: null,
+		},
+	},
 	// dialog: <Dialog />,
 	// section: <Section />,
 	// gridItem: <GridItem />,
@@ -40,7 +68,7 @@ export default props => {
 
 	const [state, setState] = useState({
 		sectionIdCount: 0,
-		sections: [],
+		sections: props.data ? props.data.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1)) : [],
 	});
 
 	const createSection = contentType => {
@@ -51,7 +79,8 @@ export default props => {
 				...state.sections,
 				{
 					id: state.sectionIdCount,
-					type: contentType,
+					contentType: contentType,
+					props: contentTypes[contentType].props,
 					pageOrder: state.sections.length,
 				},
 			],
@@ -65,20 +94,16 @@ export default props => {
 				if (section.id === id) {
 					if (order > i) {
 						newSections[i].pageOrder = order;
-						newSections[i + 1].pageOrder =
-							newSections[i + 1].pageOrder - 1;
+						newSections[i + 1].pageOrder = newSections[i + 1].pageOrder - 1;
 					} else {
 						newSections[i].pageOrder = order;
-						newSections[i - 1].pageOrder =
-							newSections[i - 1].pageOrder + 1;
+						newSections[i - 1].pageOrder = newSections[i - 1].pageOrder + 1;
 					}
 				}
 			}
 			setState({
 				...state,
-				sections: newSections.sort((a, b) =>
-					a.pageOrder > b.pageOrder ? 1 : -1
-				),
+				sections: newSections.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1)),
 			});
 		}
 	};
@@ -111,11 +136,7 @@ export default props => {
 							key={`contentItemWrapper_${section.id}`}
 						>
 							<Grid container>
-								<Grid
-									item
-									xs={12}
-									key={`ToolbarWrapper_${section.id}`}
-								>
+								<Grid item xs={12} key={`ToolbarWrapper_${section.id}`}>
 									<Toolbar
 										active={toolbar === section.id}
 										deleteSection={deleteSection}
@@ -127,11 +148,12 @@ export default props => {
 								</Grid>
 								<Grid item xs={12} key={`Grid_${section.id}`}>
 									{React.cloneElement(
-										contentTypes[section.type],
+										contentTypes[section.contentType].component,
 										{
-											key: `${section.type}_${section.id}`,
+											key: `${section.contentType}_${section.id}`,
 											editing: section.id === editing,
 											setEditing: setEditing,
+											...contentTypes[section.contentType].props,
 										}
 									)}
 								</Grid>

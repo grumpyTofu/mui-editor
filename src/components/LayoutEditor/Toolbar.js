@@ -27,9 +27,7 @@ const useStyles = makeStyles({
 	},
 });
 
-export default props => {
-	const { active, setEditing, deleteSection, updateSection, section } = props;
-
+export default ({ active, setEditing, deleteSection, updateSection, section }) => {
 	const classes = useStyles();
 	return (
 		<Grid

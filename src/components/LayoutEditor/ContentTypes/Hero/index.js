@@ -4,19 +4,19 @@ import {
 	TextField,
 	RadioGroup,
 	FormControlLabel,
-	Radio
+	Radio,
 } from '@material-ui/core';
 import { image } from './defaultImage';
 import EditDialog from '../../EditDialog';
 
-export default props => {
-	const [src, setSrc] = useState(props.img || image);
-	const { editing, setEditing } = props;
+export default ({ editing, setEditing, _image }) => {
+	const [src, setSrc] = useState(_image || image);
 
 	const [imageType, setImageType] = useState('link');
 
 	const handleImageUpload = event => {
 		const file = event.target.files[0];
+		// eslint-disable-next-line no-undef
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = function () {
@@ -25,7 +25,7 @@ export default props => {
 		reader.onerror = function (error) {
 			console.log('Error: ', error);
 		};
-	}
+	};
 
 	return (
 		<React.Fragment>
@@ -41,25 +41,25 @@ export default props => {
 				</DialogContentText>
 				<RadioGroup
 					row
-					aria-label="image type"
-					name="image type"
+					aria-label='image type'
+					name='image type'
 					value={imageType}
 					onChange={event => setImageType(event.target.value)}
 				>
 					<FormControlLabel
-						value="link"
-						control={<Radio color="primary" />}
-						label="Image Address"
-						labelPlacement="top"
+						value='link'
+						control={<Radio color='primary' />}
+						label='Image Address'
+						labelPlacement='top'
 					/>
 					<FormControlLabel
-						value="file"
-						control={<Radio color="primary" />}
-						label="File Upload"
-						labelPlacement="top"
+						value='file'
+						control={<Radio color='primary' />}
+						label='File Upload'
+						labelPlacement='top'
 					/>
 				</RadioGroup>
-				{imageType === 'link' &&
+				{imageType === 'link' && (
 					<TextField
 						autoFocus
 						margin='dense'
@@ -68,16 +68,16 @@ export default props => {
 						fullWidth
 						onChange={event => setSrc(event.target.value)}
 					/>
-				}
-				{imageType === 'file' &&
+				)}
+				{imageType === 'file' && (
 					<input
-						type="file"
-						id="avatar"
-						name="avatar"
-						accept="image/png, image/jpeg"
+						type='file'
+						id='avatar'
+						name='avatar'
+						accept='image/png, image/jpeg'
 						onChange={handleImageUpload}
 					/>
-				}
+				)}
 			</EditDialog>
 		</React.Fragment>
 	);

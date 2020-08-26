@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
-import {
-	List,
-	ListItem,
-	ListItemText,
-	DialogContentText,
-	TextField
-} from '@material-ui/core';
+import { List, ListItem, ListItemText, DialogContentText, TextField } from '@material-ui/core';
 import EditDialog from '../EditDialog';
 
-export default props => {
-
-	const { editing, setEditing } = props;
-
+export default ({ editing, setEditing, primary, secondary, link }) => {
 	const [collectionItem, setCollectionItem] = useState({
-		primary: 'Intial Content',
-		secondary: 'Some brief description',
-		link: ''
+		primary: primary || 'Intial Content',
+		secondary: secondary || 'Some brief description',
+		link: link || '',
 	});
 
 	return (
@@ -37,7 +28,7 @@ export default props => {
 					/>
 				</ListItem>
 			</List>
-			{editing &&
+			{editing && (
 				<EditDialog
 					editing={editing}
 					setEditing={setEditing}
@@ -52,10 +43,12 @@ export default props => {
 						label='Title'
 						defaultValue={collectionItem.primary}
 						fullWidth
-						onChange={event => setCollectionItem({
-							...collectionItem,
-							primary: event.target.value
-						})}
+						onChange={event =>
+							setCollectionItem({
+								...collectionItem,
+								primary: event.target.value,
+							})
+						}
 					/>
 					<TextField
 						autoFocus
@@ -63,10 +56,12 @@ export default props => {
 						label='Description'
 						defaultValue={collectionItem.secondary}
 						fullWidth
-						onChange={event => setCollectionItem({
-							...collectionItem,
-							secondary: event.target.value
-						})}
+						onChange={event =>
+							setCollectionItem({
+								...collectionItem,
+								secondary: event.target.value,
+							})
+						}
 					/>
 					<TextField
 						autoFocus
@@ -74,13 +69,15 @@ export default props => {
 						label='Link'
 						fullWidth
 						defaultValue={collectionItem.link}
-						onChange={event => setCollectionItem({
-							...collectionItem,
-							link: event.target.value
-						})}
+						onChange={event =>
+							setCollectionItem({
+								...collectionItem,
+								link: event.target.value,
+							})
+						}
 					/>
 				</EditDialog>
-			}
+			)}
 		</React.Fragment>
 	);
 };
