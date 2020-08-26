@@ -10,23 +10,26 @@ const useStyles = makeStyles({
 	toolbar: {
 		height: '100% !important',
 		'& .MuiSvgIcon-root': {
-			fontSize: '1.2rem'
+			fontSize: '1.2rem',
 		},
 		'& .MuiGrid-item': {
 			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center'
+			justifyContent: 'flex-start',
+			alignItems: 'center',
+			padding: '0 1rem',
 		},
 		'& .MuiIconButton-root': {
-			padding: '2px'
-		}
-	}
+			padding: '2px',
+		},
+		'& button': {
+			margin: '0 .5rem',
+		},
+	},
 });
 
-export default props => {
-	const { active, deleteSection, updateSection, section } = props;
+export default ({ active, setEditing, deleteSection, updateSection, section }) => {
 	const classes = useStyles();
-	return(
+	return (
 		<Grid
 			container
 			className={classes.toolbar}
@@ -34,21 +37,30 @@ export default props => {
 		>
 			<Grid item xs={12}>
 				<IconButton
-					onClick={() => updateSection(section.id, section.pageOrder - 1)}
+					onClick={() => {
+						updateSection(section.id, section.pageOrder - 1);
+					}}
 				>
-					<KeyboardArrowUpIcon/>
+					<KeyboardArrowUpIcon />
 				</IconButton>
-			</Grid>
-			<Grid item xs={12}>
 				<IconButton
-					onClick={() => updateSection(section.id, section.pageOrder + 1)}
+					onClick={() => {
+						updateSection(section.id, section.pageOrder + 1);
+					}}
 				>
-					<KeyboardArrowDownIcon/>
+					<KeyboardArrowDownIcon />
 				</IconButton>
-			</Grid>
-			<Grid item xs={12}>
-				<IconButton onClick={() => deleteSection(section.id)}><DeleteIcon/></IconButton>
+				<IconButton
+					onClick={() => {
+						setEditing(section.id);
+					}}
+				>
+					<EditIcon />
+				</IconButton>
+				<IconButton onClick={() => deleteSection(section.id)}>
+					<DeleteIcon />
+				</IconButton>
 			</Grid>
 		</Grid>
 	);
-}
+};

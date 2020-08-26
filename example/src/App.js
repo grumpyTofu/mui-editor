@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Card, CardContent } from '@material-ui/core';
-import Editor from 'mui-editor';
+import { MuiTextEditor } from 'mui-editor';
 import 'mui-editor/dist/index.css';
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
 					<Grid item xs={10}>
 						<Card className='card'>
 							<CardContent>
-								<Editor transparent data="<p>testing</p>" output={data => console.log(data)} />
+								<MuiTextEditor transparent data="<p>testing</p>" output={data => console.log(data)} />
 							</CardContent>
 						</Card>
 					</Grid>
