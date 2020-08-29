@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { List, ListItem, ListItemText, DialogContentText, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import EditDialog from '../EditDialog';
 
-export default ({ editing, setEditing, primary, secondary, link }) => {
-	const [collectionItem, setCollectionItem] = useState({
-		primary: primary || 'Intial Content',
-		secondary: secondary || 'Some brief description',
-		link: link || '',
-	});
+const useStyles = makeStyles(() => ({
+	listItem: {
+		'& .MuiListItemText-root.MuiListItemText-multiline': {
+			paddingBottom: '.75rem',
+			borderBottom: '1px rgba(0, 0, 0, 0.12) solid',
+		},
+	},
+}));
 
+export default ({ editing, setEditing, updateSection, section }) => {
+	const classes = useStyles();
 	return (
 		<React.Fragment>
 			<List>
 				<ListItem
 					button
 					component='a'
-					href={collectionItem.link}
+					href={section.props.link}
 					target='_blank'
 					rel='noreferrer noopener'
-					onClick={event => {
-						event.preventDefault();
-					}}
+					className={classes.listItem}
 				>
 					<ListItemText
-						primary={collectionItem.primary}
-						secondary={collectionItem.secondary}
+						primary={section.props.primary}
+						secondary={section.props.secondary}
 					/>
 				</ListItem>
 			</List>
@@ -41,12 +44,15 @@ export default ({ editing, setEditing, primary, secondary, link }) => {
 						autoFocus
 						margin='dense'
 						label='Title'
-						defaultValue={collectionItem.primary}
+						defaultValue={section.props.primary}
 						fullWidth
 						onChange={event =>
-							setCollectionItem({
-								...collectionItem,
-								primary: event.target.value,
+							updateSection(section.id, {
+								...section,
+								props: {
+									...section.props,
+									primary: event.target.value,
+								},
 							})
 						}
 					/>
@@ -54,12 +60,15 @@ export default ({ editing, setEditing, primary, secondary, link }) => {
 						autoFocus
 						margin='dense'
 						label='Description'
-						defaultValue={collectionItem.secondary}
+						defaultValue={section.props.secondary}
 						fullWidth
 						onChange={event =>
-							setCollectionItem({
-								...collectionItem,
-								secondary: event.target.value,
+							updateSection(section.id, {
+								...section,
+								props: {
+									...section.props,
+									secondary: event.target.value,
+								},
 							})
 						}
 					/>
@@ -68,11 +77,14 @@ export default ({ editing, setEditing, primary, secondary, link }) => {
 						margin='dense'
 						label='Link'
 						fullWidth
-						defaultValue={collectionItem.link}
+						defaultValue={section.props.link}
 						onChange={event =>
-							setCollectionItem({
-								...collectionItem,
-								link: event.target.value,
+							updateSection(section.id, {
+								...section,
+								props: {
+									...section.props,
+									link: event.target.value,
+								},
 							})
 						}
 					/>

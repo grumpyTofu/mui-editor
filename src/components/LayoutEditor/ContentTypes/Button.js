@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, DialogContentText, TextField } from '@material-ui/core';
 import EditDialog from '../EditDialog';
 
-export default ({ editing, setEditing, text, link }) => {
-	const [buttonText, setButtonText] = useState(text || 'Click Here');
-	const [buttonLink, setButtonLink] = useState(link || '');
+export default ({ editing, setEditing, updateSection, section }) => {
 	return (
 		<div
 			style={{
@@ -21,14 +19,11 @@ export default ({ editing, setEditing, text, link }) => {
 				size='small'
 				variant='outlined'
 				component='a'
-				href={buttonLink}
+				href={section.props.link}
 				target='_blank'
 				rel='noreferrer noopener'
-				onClick={event => {
-					event.preventDefault();
-				}}
 			>
-				{buttonText}
+				{section.props.text}
 			</Button>
 			<EditDialog editing={editing} setEditing={setEditing} title='Update Button'>
 				<DialogContentText>
@@ -38,17 +33,33 @@ export default ({ editing, setEditing, text, link }) => {
 					autoFocus
 					margin='dense'
 					label='Button Text'
-					defaultValue={buttonText}
+					value={section.props.text}
 					fullWidth
-					onChange={event => setButtonText(event.target.value)}
+					onChange={event =>
+						updateSection(section.id, {
+							...section,
+							props: {
+								...section.props,
+								text: event.target.value
+							}
+						})
+					}
 				/>
 				<TextField
 					autoFocus
 					margin='dense'
 					label='Link'
 					fullWidth
-					defaultValue={buttonLink}
-					onChange={event => setButtonLink(event.target.value)}
+					value={section.props.link}
+					onChange={event =>
+						updateSection(section.id, {
+							...section,
+							props: {
+								...section.props,
+								link: event.target.value
+							}
+						})
+					}
 				/>
 			</EditDialog>
 		</div>

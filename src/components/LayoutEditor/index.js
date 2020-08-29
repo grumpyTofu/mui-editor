@@ -2,57 +2,7 @@ import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import Selector from './Selector';
 import Toolbar from './Toolbar';
-import {
-	Hero,
-	// Collection,
-	CollectionItem,
-	// Dialog,
-	Button,
-	// GridItem,
-	// Section,
-	Text,
-	Title,
-} from './ContentTypes';
-
-const contentTypes = {
-	Hero: {
-		component: <Hero />,
-		props: {
-			image: null,
-		},
-	},
-	Title: {
-		component: <Title />,
-		props: {
-			text: null,
-		},
-	},
-	Text: {
-		component: <Text />,
-		props: {
-			html: null,
-		},
-	},
-	Button: {
-		component: <Button />,
-		props: {
-			text: null,
-			link: null,
-		},
-	},
-	// collection: <Collection />,
-	'Collection Item': {
-		component: <CollectionItem />,
-		props: {
-			primary: null,
-			secondary: null,
-			link: null,
-		},
-	},
-	// dialog: <Dialog />,
-	// section: <Section />,
-	// gridItem: <GridItem />,
-};
+import contentTypes from './ContentTypes';
 
 export default props => {
 	const output =
@@ -67,7 +17,9 @@ export default props => {
 	};
 
 	const [state, setState] = useState({
-		sectionIdCount: 0,
+		sectionIdCount: props.data
+			? props.data.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1
+			: 0,
 		sections: props.data ? props.data.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1)) : [],
 	});
 
@@ -87,7 +39,7 @@ export default props => {
 		});
 	};
 
-	const updateSection = (id, order) => {
+	const moveSection = (id, order) => {
 		var newSections = state.sections;
 		if (order >= 0 && order < newSections.length) {
 			for (var [i, section] of newSections.entries()) {
@@ -106,6 +58,19 @@ export default props => {
 				sections: newSections.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1)),
 			});
 		}
+	};
+
+	const updateSection = (id, _section) => {
+		var newSections = state.sections;
+		for (var [i, section] of newSections.entries()) {
+			if (section.id === id) {
+				newSections[i] = _section;
+			}
+		}
+		setState({
+			...state,
+			sections: newSections,
+		});
 	};
 
 	const deleteSection = id => {
@@ -133,14 +98,14 @@ export default props => {
 							id='contentTypeWrapper'
 							onMouseOver={() => setToolbar(section.id)}
 							onMouseOut={() => setToolbar(null)}
-							key={`contentItemWrapper_${section.id}`}
+							key={`contentTypeWrapper_${section.id}`}
 						>
 							<Grid container>
 								<Grid item xs={12} key={`ToolbarWrapper_${section.id}`}>
 									<Toolbar
 										active={toolbar === section.id}
 										deleteSection={deleteSection}
-										updateSection={updateSection}
+										updateSection={moveSection}
 										setEditing={setEditing}
 										section={section}
 										key={`Toolbar_${section.id}`}
@@ -153,7 +118,8 @@ export default props => {
 											key: `${section.contentType}_${section.id}`,
 											editing: section.id === editing,
 											setEditing: setEditing,
-											...contentTypes[section.contentType].props,
+											updateSection: updateSection,
+											section: section,
 										}
 									)}
 								</Grid>
