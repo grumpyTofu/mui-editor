@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Editor from '../../TextEditor';
 import EditDialog from '../EditDialog';
 
-export default ({ editing, setEditing, _html }) => {
-	const [html, setHtml] = useState(_html || '<div>Add Some Content</div>');
+export default ({ editing, setEditing, updateSection, section }) => {
 
 	const handleOutput = data => {
 		setEditing(false);
-		setHtml(data);
+		updateSection(section.id, {
+			...section,
+			props: {
+				...section.props,
+				html: data
+			}
+		});
 	};
 
 	return (
 		<React.Fragment>
-			<div dangerouslySetInnerHTML={{ __html: html }} style={{ textAlign: 'left' }} />
+			<div dangerouslySetInnerHTML={{ __html: section.props.html }} style={{ textAlign: 'left' }} />
 			{editing && (
 				<EditDialog editing={editing} setEditing={setEditing} title='Update Content'>
-					<Editor transparent data={html} output={data => handleOutput(data)} />
+					<Editor transparent data={section.props.html} output={data => handleOutput(data)} />
 				</EditDialog>
 			)}
 		</React.Fragment>

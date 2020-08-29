@@ -6,11 +6,9 @@ import {
 	FormControlLabel,
 	Radio,
 } from '@material-ui/core';
-import { image } from './defaultImage';
 import EditDialog from '../../EditDialog';
 
-export default ({ editing, setEditing, _image }) => {
-	const [src, setSrc] = useState(_image || image);
+export default ({ editing, setEditing, updateSection, section }) => {
 
 	const [imageType, setImageType] = useState('link');
 
@@ -20,7 +18,9 @@ export default ({ editing, setEditing, _image }) => {
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = function () {
-			setSrc(reader.result);
+			let newSection = section;
+			newSection.props.image = reader.result;
+			updateSection(section.id, newSection);
 		};
 		reader.onerror = function (error) {
 			console.log('Error: ', error);
@@ -30,7 +30,7 @@ export default ({ editing, setEditing, _image }) => {
 	return (
 		<React.Fragment>
 			<img
-				src={src}
+				src={section.props.image}
 				width='100%'
 				height='auto'
 				style={{ maxHeight: '100%', marginBottom: '1.5rem' }}
@@ -66,7 +66,15 @@ export default ({ editing, setEditing, _image }) => {
 						label='Image source link'
 						defaultValue=''
 						fullWidth
-						onChange={event => setSrc(event.target.value)}
+						onChange={event =>
+							updateSection(section.id, {
+								...section,
+								props: {
+									...section.props,
+									image: event.target.value
+								}
+							})
+						}
 					/>
 				)}
 				{imageType === 'file' && (
@@ -82,3 +90,5 @@ export default ({ editing, setEditing, _image }) => {
 		</React.Fragment>
 	);
 };
+
+export { image as defaultImage } from './defaultImage';
