@@ -1,8 +1,19 @@
 import React from 'react';
 import { List, ListItem, ListItemText, DialogContentText, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import EditDialog from '../EditDialog';
 
+const useStyles = makeStyles(() => ({
+	listItem: {
+		'& .MuiListItemText-root.MuiListItemText-multiline': {
+			paddingBottom: '.75rem',
+			borderBottom: '1px rgba(0, 0, 0, 0.12) solid',
+		},
+	},
+}));
+
 export default ({ editing, setEditing, updateSection, section }) => {
+	const classes = useStyles();
 	return (
 		<React.Fragment>
 			<List>
@@ -12,6 +23,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 					href={section.props.link}
 					target='_blank'
 					rel='noreferrer noopener'
+					className={classes.listItem}
 				>
 					<ListItemText
 						primary={section.props.primary}
@@ -40,7 +52,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 								props: {
 									...section.props,
 									primary: event.target.value,
-								}
+								},
 							})
 						}
 					/>
@@ -56,7 +68,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 								props: {
 									...section.props,
 									secondary: event.target.value,
-								}
+								},
 							})
 						}
 					/>
@@ -72,7 +84,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 								props: {
 									...section.props,
 									link: event.target.value,
-								}
+								},
 							})
 						}
 					/>

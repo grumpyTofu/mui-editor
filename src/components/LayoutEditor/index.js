@@ -17,7 +17,9 @@ export default props => {
 	};
 
 	const [state, setState] = useState({
-		sectionIdCount: props.data ? props.data.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1 : 0,
+		sectionIdCount: props.data
+			? props.data.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1
+			: 0,
 		sections: props.data ? props.data.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1)) : [],
 	});
 
@@ -59,7 +61,7 @@ export default props => {
 	};
 
 	const updateSection = (id, _section) => {
-		let newSections = state.sections;
+		var newSections = state.sections;
 		for (var [i, section] of newSections.entries()) {
 			if (section.id === id) {
 				newSections[i] = _section;
@@ -69,7 +71,7 @@ export default props => {
 			...state,
 			sections: newSections,
 		});
-	}
+	};
 
 	const deleteSection = id => {
 		var newSections = [];
