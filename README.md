@@ -28,11 +28,12 @@ export default props => {
 			setDataFromDB(res.editorConfig); // Output data will contain the following: (html, editorConfig)
 		}).catch(error => {
 			console.error(error);
-		}); })
+		}); 
+	}, []);
 
 	return(
 		<MuiEditor
-			output={data => console.log(data)} // Will warn if not defined -> Send me to your DB: (html, editorConfig)
+			output={data => console.log(data)}
 			data={dataFromDB}
 		/>
 	);
