@@ -28,7 +28,8 @@ export default props => {
 			setDataFromDB(res.editorConfig); // Output data will contain the following: (html, editorConfig)
 		}).catch(error => {
 			console.error(error);
-		}); })
+		}); 
+	}, []);
 
 	return(
 		<MuiEditor

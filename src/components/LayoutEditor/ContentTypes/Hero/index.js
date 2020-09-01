@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	DialogContentText,
 	TextField,
@@ -9,8 +9,7 @@ import {
 import EditDialog from '../../EditDialog';
 
 export default ({ editing, setEditing, updateSection, section }) => {
-
-	const [imageType, setImageType] = useState('link');
+	const [imageType, setImageType] = React.useState('link');
 
 	const handleImageUpload = event => {
 		const file = event.target.files[0];
@@ -18,7 +17,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = function () {
-			let newSection = section;
+			var newSection = section;
 			newSection.props.image = reader.result;
 			updateSection(section.id, newSection);
 		};
@@ -71,8 +70,8 @@ export default ({ editing, setEditing, updateSection, section }) => {
 								...section,
 								props: {
 									...section.props,
-									image: event.target.value
-								}
+									image: event.target.value,
+								},
 							})
 						}
 					/>
@@ -80,8 +79,8 @@ export default ({ editing, setEditing, updateSection, section }) => {
 				{imageType === 'file' && (
 					<input
 						type='file'
-						id='avatar'
-						name='avatar'
+						id='file-input'
+						name='file-input'
 						accept='image/png, image/jpeg'
 						onChange={handleImageUpload}
 					/>
