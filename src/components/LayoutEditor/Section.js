@@ -1,5 +1,5 @@
-import React from 'react';
-import Grid from '@material-ui/core';
+import React, { useState } from 'react';
+import Grid from '@material-ui/core/Grid';
 import Toolbar from './Toolbar';
 import ContentType from './ContentType';
 
@@ -13,14 +13,14 @@ export default ({ section }) => {
 			onMouseOver={() => setToolbar(section.id)}
 			onMouseOut={() => setToolbar(null)}
 		>
-			<Grid item xs={12} key={`ToolbarWrapper_${section.id}`}>
+			<Grid item xs={12}>
 				<Toolbar
 					active={toolbar === section.id}
 					setEditing={setEditing}
 					section={section}
 				/>
 			</Grid>
-			<Grid item xs={12} key={`Grid_${section.id}`}>
+			<Grid item xs={12}>
 				<ContentType
 					editing={section.id === editing}
 					setEditing={setEditing}

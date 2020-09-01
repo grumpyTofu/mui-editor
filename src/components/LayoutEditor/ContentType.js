@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import contentTypes from './ContentTypes';
 import { StoreContext } from './Store';
 
-export default ({ section, editing, setEditing, updateSection }) => {
+export default ({ section, editing, setEditing }) => {
 	const { actions } = useContext(StoreContext);
 	return(
 		<React.Fragment>

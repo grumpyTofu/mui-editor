@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import Grid from '@material-ui/core';
-import Selector from './Selector';
 import withStore, { StoreContext } from './Store';
+import Grid from '@material-ui/core/Grid';
+import Selector from './Selector';
+import Section from './Section';
 
 export default withStore(props => {
 	const { state, actions } = useContext(StoreContext);
