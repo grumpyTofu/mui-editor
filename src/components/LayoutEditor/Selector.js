@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 
 export default ({ saveData }) => {
 
-	const { state, actions } = useContext(StoreContext);
+	const { actions } = useContext(StoreContext);
 
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
