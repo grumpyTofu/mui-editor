@@ -8,7 +8,6 @@ import {
 export const applyMiddleware = (state, dispatch) => (action) => {
 	if (action.type === UPDATE_SECTION) {
 		const { id, section } = action.payload;
-		console.log(action.payload)
 			let newSections = state.sections;
 			for (var [i, _section] of newSections.entries()) {
 				if (_section.id === id) {
