@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { StoreContext } from './Store';
 import { Grid, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -27,8 +28,9 @@ const useStyles = makeStyles({
 	},
 });
 
-export default ({ active, setEditing, deleteSection, updateSection, section }) => {
+export default ({ active, setEditing, section }) => {
 	const classes = useStyles();
+	const { actions } = useContext(StoreContext);
 	return (
 		<Grid
 			container
@@ -38,14 +40,14 @@ export default ({ active, setEditing, deleteSection, updateSection, section }) =
 			<Grid item xs={12}>
 				<IconButton
 					onClick={() => {
-						updateSection(section.id, section.pageOrder - 1);
+						actions.updateSectionOrder(section.id, section.pageOrder - 1);
 					}}
 				>
 					<KeyboardArrowUpIcon />
 				</IconButton>
 				<IconButton
 					onClick={() => {
-						updateSection(section.id, section.pageOrder + 1);
+						actions.updateSectionOrder(section.id, section.pageOrder + 1);
 					}}
 				>
 					<KeyboardArrowDownIcon />
@@ -57,7 +59,7 @@ export default ({ active, setEditing, deleteSection, updateSection, section }) =
 				>
 					<EditIcon />
 				</IconButton>
-				<IconButton onClick={() => deleteSection(section.id)}>
+				<IconButton onClick={() => actions.deleteSection(section.id)}>
 					<DeleteIcon />
 				</IconButton>
 			</Grid>

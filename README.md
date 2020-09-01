@@ -32,7 +32,7 @@ export default props => {
 
 	return(
 		<MuiEditor
-			output={data => console.log(data)} // Will warn if not defined -> Send me to your DB: (html, editorConfig)
+			output={data => console.log(data)}
 			data={dataFromDB}
 		/>
 	);
