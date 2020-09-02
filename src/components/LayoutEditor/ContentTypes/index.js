@@ -50,3 +50,5 @@ const contentTypes = {
 };
 
 export default contentTypes;
+
+export const contentTypesList = Object.keys(contentTypes);

@@ -17,9 +17,13 @@ export default ({ editing, setEditing, updateSection, section }) => {
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = function () {
-			var newSection = section;
-			newSection.props.image = reader.result;
-			updateSection(section.id, newSection);
+			updateSection(section.id, {
+				...section,
+				props: {
+					...section.props,
+					image: reader.result,
+				},
+			});
 		};
 		reader.onerror = function (error) {
 			console.log('Error: ', error);

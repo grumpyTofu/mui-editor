@@ -14,6 +14,19 @@ or
 yarn add mui-editor @material-ui/core@4.11.0 @material-ui/icons react-quill@1.3.5
 ```
 
+## Styling
+
+Make sure to add the following script tag to ensure editor output is styled correctly
+```html
+<!-- Production Material-UI Library -->
+<script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js" crossorigin="anonymous"></script>
+<!-- Fonts to support Material Design -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+<!-- Icons to support Material Design -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+```
+
+
 ## Layout Editor Usage
 
 ```jsx
@@ -28,11 +41,12 @@ export default props => {
 			setDataFromDB(res.editorConfig); // Output data will contain the following: (html, editorConfig)
 		}).catch(error => {
 			console.error(error);
-		}); })
+		});
+	}, []);
 
 	return(
 		<MuiEditor
-			output={data => console.log(data)} // Will warn if not defined -> Send me to your DB: (html, editorConfig)
+			output={data => console.log(data)}
 			data={dataFromDB}
 		/>
 	);

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, CardActions, Fab, Menu, MenuItem } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
+import contentTypes from './ContentTypes';
+import { StoreContext } from './Store';
 
 const useStyles = makeStyles(() => ({
 	card: {
@@ -13,7 +15,10 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-export default ({ contentTypes, createSection, saveData }) => {
+export default ({ saveData }) => {
+
+	const { actions } = useContext(StoreContext);
+
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -26,7 +31,10 @@ export default ({ contentTypes, createSection, saveData }) => {
 	};
 
 	const handleSelect = key => {
-		createSection(key);
+		actions.createSection({
+			contentType: key,
+			props: contentTypes[key].props,
+		});
 		handleClose();
 	};
 
