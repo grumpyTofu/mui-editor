@@ -9,7 +9,9 @@
 ```bash
 npm install mui-editor @material-ui/core@4.11.0 @material-ui/icons react-quill@1.3.5
 ```
+
 or
+
 ```bash
 yarn add mui-editor @material-ui/core@4.11.0 @material-ui/icons react-quill@1.3.5
 ```
@@ -17,15 +19,21 @@ yarn add mui-editor @material-ui/core@4.11.0 @material-ui/icons react-quill@1.3.
 ## Styling
 
 Make sure to add the following script tag to ensure editor output is styled correctly
+
 ```html
 <!-- Production Material-UI Library -->
-<script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js" crossorigin="anonymous"></script>
+<script
+	src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js"
+	crossorigin="anonymous"
+></script>
 <!-- Fonts to support Material Design -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+/>
 <!-- Icons to support Material Design -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 ```
-
 
 ## Layout Editor Usage
 
@@ -34,31 +42,32 @@ import React, { useState, useEffect } from 'react';
 import MuiEditor from 'mui-editor';
 
 export default props => {
-
 	const [state, setState] = useState({
-                sectionIdCount: null,
-                dataFromDB: []
-            });
+		sectionIdCount: null,
+		dataFromDB: [],
+	});
 	useEffect(() => {
-		fetch('/api/endpoint/goes/here').then(res => res.json()).then(res => {
-			setState({
-                                sectionIdCount: res.highestIdFromDB,
-                                dataFromDB: res.editorConfig
-                        }); // Output data will contain the following: (html, editorConfig)
-		}).catch(error => {
-			console.error(error);
-		});
+		fetch('/api/endpoint/goes/here')
+			.then(res => res.json())
+			.then(res => {
+				setState({
+					sectionIdCount: res.highestIdFromDB,
+					dataFromDB: res.editorConfig,
+				}); // Output data will contain the following: (html, editorConfig)
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}, []);
 
-	return(
+	return (
 		<MuiEditor
 			output={data => console.log(data)}
 			data={state.dataFromDB}
-                        sectionIdCount={state.sectionIdCount}
+			sectionIdCount={state.sectionIdCount}
 		/>
 	);
-}
-
+};
 ```
 
 ## Text Editor Usage
@@ -68,11 +77,8 @@ import React from 'react';
 import { MuiTextEditor } from 'mui-editor';
 
 export default props => {
-	return(
-		<MuiTextEditor transparent output={data => console.log(data)} />
-	);
-}
-
+	return <MuiTextEditor transparent output={data => console.log(data)} />;
+};
 ```
 
 ## License

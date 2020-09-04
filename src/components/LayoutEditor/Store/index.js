@@ -6,18 +6,15 @@ import { applyMiddleware } from './middleware';
 const StoreContext = createContext(initialState);
 
 const StoreProvider = ({ children }) => {
+	const [state, dispatch] = useReducer(reducers, initialState);
+	const enhancedDispatch = applyMiddleware(state, dispatch);
+	const actions = useActions(state, enhancedDispatch);
 
-  const [state, dispatch] = useReducer(reducers, initialState);
-  const enhancedDispatch = applyMiddleware(state, dispatch);
-  const actions = useActions(state, enhancedDispatch);
-
-  return (
-    <StoreContext.Provider
-      value={{ state, enhancedDispatch, actions }}
-    >
-      {children}
-    </StoreContext.Provider>
-  );
+	return (
+		<StoreContext.Provider value={{ state, enhancedDispatch, actions }}>
+			{children}
+		</StoreContext.Provider>
+	);
 };
 
 export { StoreContext, StoreProvider };

@@ -7,14 +7,15 @@ const initialState = {
 };
 
 const reducers = (state = initialState, action) => {
-	switch(action.type) {
-		case SET_STATE:
+	switch (action.type) {
+		case SET_STATE: {
 			const newState = action.payload;
 			return {
 				...newState,
 				checkedProps: true,
 			};
-		case CREATE_SECTION:
+		}
+		case CREATE_SECTION: {
 			const { contentType, props } = action.payload;
 			return {
 				...state,
@@ -28,16 +29,19 @@ const reducers = (state = initialState, action) => {
 						pageOrder: state.sections.length,
 					},
 				],
-			}
-		case DELETE_SECTION:
+			};
+		}
+		case DELETE_SECTION: {
 			const { sections } = action.payload;
 			return {
 				...state,
 				sections: sections,
-			}
-		default:
+			};
+		}
+		default: {
 			return state;
-	};
+		}
+	}
 };
 
 export { initialState, reducers };
