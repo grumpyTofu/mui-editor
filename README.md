@@ -35,10 +35,16 @@ import MuiEditor from 'mui-editor';
 
 export default props => {
 
-	const [dataFromDB, setDataFromDB] = useState([]);
+	const [state, setState] = useState({
+                sectionIdCount: null,
+                dataFromDB: []
+            });
 	useEffect(() => {
 		fetch('/api/endpoint/goes/here').then(res => res.json()).then(res => {
-			setDataFromDB(res.editorConfig); // Output data will contain the following: (html, editorConfig)
+			setState({
+                                sectionIdCount: res.highestIdFromDB,
+                                dataFromDB: res.editorConfig
+                        }); // Output data will contain the following: (html, editorConfig)
 		}).catch(error => {
 			console.error(error);
 		});
@@ -47,7 +53,8 @@ export default props => {
 	return(
 		<MuiEditor
 			output={data => console.log(data)}
-			data={dataFromDB}
+			data={state.dataFromDB}
+                        sectionIdCount={state.sectionIdCount}
 		/>
 	);
 }
