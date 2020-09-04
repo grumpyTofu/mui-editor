@@ -40,8 +40,8 @@ export default ({ editing, setEditing, updateSection, section }) => {
 							...section,
 							props: {
 								...section.props,
-								text: event.target.value
-							}
+								text: event.target.value,
+							},
 						})
 					}
 				/>
@@ -56,8 +56,8 @@ export default ({ editing, setEditing, updateSection, section }) => {
 							...section,
 							props: {
 								...section.props,
-								link: event.target.value
-							}
+								link: event.target.value,
+							},
 						})
 					}
 				/>

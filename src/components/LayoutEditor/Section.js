@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid';
 import Toolbar from './Toolbar';
 import ContentType from './ContentType';
 
-
 export default ({ section }) => {
 	const [toolbar, setToolbar] = useState(null);
 	const [editing, setEditing] = useState(null);

@@ -15,7 +15,9 @@
     "ecmaVersion": 2020,
     "ecmaFeatures": {
       "legacyDecorators": true,
-      "jsx": true
+			"jsx": true,
+			"arrowFunctions": true,
+			"builtinGlobals": false
     }
   },
   "settings": {

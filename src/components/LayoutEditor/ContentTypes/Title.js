@@ -2,7 +2,6 @@ import React from 'react';
 import { Typography, Divider, TextField, DialogContentText } from '@material-ui/core';
 import EditDialog from '../EditDialog';
 
-
 export default ({ editing, setEditing, updateSection, section }) => {
 	return (
 		<React.Fragment>

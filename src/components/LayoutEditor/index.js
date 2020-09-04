@@ -4,28 +4,32 @@ import Grid from '@material-ui/core/Grid';
 import Selector from './Selector';
 import Section from './Section';
 
-export default withStore(props => {
+export default withStore(({ data, sectionIdCount, output, ...props }) => {
 	const { state, actions } = useContext(StoreContext);
 
-	const output =
-		props.output ||
+	const _output =
+		output ||
 		function (outputHtml, outputEditorConfig) {
 			console.warn('Please set up an output function.', outputHtml, outputEditorConfig);
 		};
 
 	const saveData = () => {
 		var content = document.getElementById('mui-layout-editor').innerHTML;
-		output(content, state.sections);
+		_output(content, state.sections);
 	};
 
 	useEffect(() => {
-		if (props.data && state.checkedProps === false) {
+		if (data && state.checkedProps === false) {
 			const derivedState = {
-				sectionIdCount:
-					props.data.length > 0
-						? props.data.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1
-						: 0,
-				sections: props.data.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1)),
+				sectionIdCount: sectionIdCount
+					? sectionIdCount + 1
+					: data.length > 0
+					? data.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1
+					: 0,
+				sections:
+					data && data.length > 0
+						? data.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1))
+						: [],
 			};
 			actions.setState(derivedState);
 		}
