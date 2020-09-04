@@ -21,11 +21,13 @@ export default withStore(props => {
 	useEffect(() => {
 		if (props.data && state.checkedProps === false) {
 			const derivedState = {
-				sectionIdCount:
+				sectionIdCount: props.sectionIdCount ? props.sectionIdCount :
 					props.data.length > 0
 						? props.data.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1
 						: 0,
-				sections: props.data.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1)),
+				sections: props.data && props.data.length > 0 ? 
+                                        props.data.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1))
+                                        : [],
 			};
 			actions.setState(derivedState);
 		}
