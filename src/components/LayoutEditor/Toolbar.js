@@ -5,12 +5,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import EditIcon from '@material-ui/icons/Edit';
+import ViewCompactIcon from '@material-ui/icons/ViewCompact';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
 	toolbar: {
 		height: '100% !important',
-		backgroundColor: '#424242',
+		backgroundColor: '#3F51B5',
+		borderTopLeftRadius: '4px',
+		borderTopRightRadius: '4px',
 		'& .MuiSvgIcon-root': {
 			fontSize: '1.2rem',
 		},
@@ -22,7 +25,7 @@ const useStyles = makeStyles({
 		},
 		'& .MuiIconButton-root': {
 			padding: '2px',
-			color: 'white'
+			color: 'white',
 		},
 		'& button': {
 			margin: '0 .5rem',
@@ -60,6 +63,9 @@ export default ({ active, setEditing, section }) => {
 					}}
 				>
 					<EditIcon />
+				</IconButton>
+				<IconButton>
+					<ViewCompactIcon />
 				</IconButton>
 				<IconButton onClick={() => actions.deleteSection(section.id)}>
 					<DeleteIcon />
