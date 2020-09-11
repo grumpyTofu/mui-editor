@@ -27,6 +27,13 @@ const reducers = (state = initialState, action) => {
 						contentType: contentType,
 						props: props,
 						pageOrder: state.sections.length,
+						gridSize: {
+							xs: 12,
+							sm: 12,
+							md: 12,
+							lg: 12,
+							xl: 12
+						}
 					},
 				],
 			};

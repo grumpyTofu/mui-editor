@@ -4,8 +4,6 @@ import Button from './Button';
 // import Collection from './Collection';
 import CollectionItem from './CollectionItem';
 // import Dialog from './Dialog';
-// import GridItem from './GridItem';
-// import Section from './Section';
 import Text from './Text';
 import Title from './Title';
 
@@ -45,8 +43,6 @@ const contentTypes = {
 		},
 	},
 	// dialog: <Dialog />,
-	// section: <Section />,
-	// gridItem: <GridItem />,
 };
 
 export default contentTypes;

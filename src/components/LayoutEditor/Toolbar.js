@@ -10,17 +10,19 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
 	toolbar: {
 		height: '100% !important',
+		backgroundColor: '#424242',
 		'& .MuiSvgIcon-root': {
 			fontSize: '1.2rem',
 		},
 		'& .MuiGrid-item': {
 			display: 'flex',
-			justifyContent: 'flex-start',
+			justifyContent: 'center',
 			alignItems: 'center',
 			padding: '0 1rem',
 		},
 		'& .MuiIconButton-root': {
 			padding: '2px',
+			color: 'white'
 		},
 		'& button': {
 			margin: '0 .5rem',
