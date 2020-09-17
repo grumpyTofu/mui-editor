@@ -64,9 +64,9 @@ export default ({ active, setEditing, section }) => {
 				>
 					<EditIcon />
 				</IconButton>
-				<IconButton>
+				{/* <IconButton>
 					<ViewCompactIcon />
-				</IconButton>
+				</IconButton> */}
 				<IconButton onClick={() => actions.deleteSection(section.id)}>
 					<DeleteIcon />
 				</IconButton>
