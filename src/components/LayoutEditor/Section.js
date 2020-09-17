@@ -11,6 +11,15 @@ export default ({ section }) => {
 			container
 			onMouseOver={() => setToolbar(section.id)}
 			onMouseOut={() => setToolbar(null)}
+			style={
+				toolbar === section.id
+					? {
+							boxShadow:
+								'rgba(63, 81, 181, .14) 0px 2px 1px -1px, rgba(63, 81, 181, .14) 0px 1px 1px 0px, rgba(63, 81, 181, .14) 0px 1px 3px 0px',
+							borderRadius: '4px',
+					  }
+					: {}
+			}
 		>
 			<Grid item xs={12}>
 				<Toolbar

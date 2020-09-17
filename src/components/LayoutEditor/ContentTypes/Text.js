@@ -18,7 +18,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 		<React.Fragment>
 			<div
 				dangerouslySetInnerHTML={{ __html: section.props.html }}
-				style={{ textAlign: 'left' }}
+				style={{ textAlign: 'left', margin: '1.5rem' }}
 			/>
 			{editing && (
 				<EditDialog editing={editing} setEditing={setEditing} title='Update Content'>
