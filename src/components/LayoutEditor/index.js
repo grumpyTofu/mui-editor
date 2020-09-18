@@ -3,6 +3,7 @@ import withStore, { StoreContext } from './Store';
 import Grid from '@material-ui/core/Grid';
 import Selector from './Selector';
 import Section from './Section';
+import GridEditDialog from './GridEditDialog';
 
 export default withStore(({ config, output, ...props }) => {
 	const { state, actions } = useContext(StoreContext);
@@ -70,6 +71,8 @@ export default withStore(({ config, output, ...props }) => {
 					})}
 			</Grid>
 			<Selector saveData={saveData} />
+			<GridEditDialog />
 		</React.Fragment>
 	);
 });
+

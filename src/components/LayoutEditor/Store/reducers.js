@@ -1,9 +1,23 @@
-import { SET_STATE, CREATE_SECTION, DELETE_SECTION } from './actions';
+import {
+	SET_STATE,
+	CREATE_SECTION,
+	DELETE_SECTION,
+	OPEN_GRID_EDIT,
+	CLOSE_GRID_EDIT,
+	UPDATE_GRID_EDIT,
+} from './actions';
 
 const initialState = {
 	checkedProps: false,
 	sectionIdCount: 0,
 	sections: [],
+	toolbar: {
+		gridEdit: {
+			open: false,
+			section: {},
+			errors: {},
+		},
+	},
 };
 
 const reducers = (state = initialState, action) => {
@@ -13,6 +27,9 @@ const reducers = (state = initialState, action) => {
 			return {
 				...newState,
 				checkedProps: true,
+				toolbar: {
+					...state.toolbar,
+				},
 			};
 		}
 		case CREATE_SECTION: {
@@ -32,8 +49,8 @@ const reducers = (state = initialState, action) => {
 							sm: 12,
 							md: 12,
 							lg: 12,
-							xl: 12
-						}
+							xl: 12,
+						},
 					},
 				],
 			};
@@ -43,6 +60,30 @@ const reducers = (state = initialState, action) => {
 			return {
 				...state,
 				sections: sections,
+			};
+		}
+		case OPEN_GRID_EDIT: {
+			const section = action.payload;
+			return {
+				...state,
+				toolbar: {
+					...state.toolbar,
+					gridEdit: {
+						...state.toolbar.gridEdit,
+						open: true,
+						section: section,
+					},
+				},
+			};
+		}
+		case UPDATE_GRID_EDIT: {
+			const gridEdit = action.payload;
+			return {
+				...state,
+				toolbar: {
+					...state.toolbar,
+					gridEdit: gridEdit
+				},
 			};
 		}
 		default: {
