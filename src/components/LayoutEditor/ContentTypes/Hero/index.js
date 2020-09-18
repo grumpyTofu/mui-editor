@@ -36,7 +36,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 				src={section.props.image}
 				width='100%'
 				height='auto'
-				style={{ maxHeight: '100%', margin: '-1.5rem 1.5rem -1.5rem -1.5rem' }}
+				style={{ maxHeight: '100%', marginBottom: '1.5rem' }}
 			/>
 			<EditDialog editing={editing} setEditing={setEditing} title='Edit Image'>
 				<DialogContentText>
