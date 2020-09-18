@@ -16,7 +16,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default ({ saveData }) => {
-
 	const { actions } = useContext(StoreContext);
 
 	const classes = useStyles();

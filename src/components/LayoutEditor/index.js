@@ -41,17 +41,28 @@ export default withStore(({ config, output, ...props }) => {
 	return (
 		<React.Fragment>
 			<div ref={editorRef}>
-				<Grid container style={{ padding: '1.5rem' }}>
+				<Grid container>
 					{state.sections.length > 0 &&
-						state.sections.map((section, index) => (
-							<Grid
-								item
-								{...section.gridSize}
-								key={`contentTypeWrapper_${section.id}`}
-							>
-								<Section section={section} key={`Section_${section.id}`} />
-							</Grid>
-						))}
+						state.sections.map((section, index) => {
+							var styles = { margin: '.5rem 1.5rem' };
+							if (section.contentType === 'Hero') {
+								styles = { marginBottom: '1.5rem' };
+							} else if (section.pageOrder === 0) {
+								styles = { margin: '1.5rem 1.5rem 0rem 1.5rem' };
+							} else if (section.pageOrder === state.sections.length - 1) {
+								styles = { margin: '0rem 1.5rem 1.5rem 1.5rem' };
+							}
+							return (
+								<Grid
+									item
+									{...section.gridSize}
+									key={`contentTypeWrapper_${section.id}`}
+									style={styles}
+								>
+									<Section section={section} key={`Section_${section.id}`} />
+								</Grid>
+							);
+						})}
 				</Grid>
 			</div>
 			<Selector saveData={saveData} />
