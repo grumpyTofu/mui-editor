@@ -30,5 +30,5 @@ export const useActions = (state, dispatch) => ({
 	deleteSection: id => dispatch({ type: DELETE_SECTION, payload: { id: id } }),
 	openGridEdit: section => dispatch({ type: OPEN_GRID_EDIT, payload: section }),
 	closeGridEdit: () => dispatch({ type: CLOSE_GRID_EDIT }),
-	updateGridEdit: gridEdit => dispatch({ type: UPDATE_GRID_EDIT, payload: gridEdit })
+	updateGridEdit: gridEdit => dispatch({ type: UPDATE_GRID_EDIT, payload: gridEdit }),
 });

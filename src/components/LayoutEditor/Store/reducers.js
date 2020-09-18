@@ -72,17 +72,32 @@ const reducers = (state = initialState, action) => {
 						...state.toolbar.gridEdit,
 						open: true,
 						section: section,
+						errors: {},
+					},
+				},
+			};
+		}
+		case CLOSE_GRID_EDIT: {
+			return {
+				...state,
+				toolbar: {
+					...state.toolbar,
+					gridEdit: {
+						open: false,
+						section: {},
+						errors: {},
 					},
 				},
 			};
 		}
 		case UPDATE_GRID_EDIT: {
 			const gridEdit = action.payload;
+			console.log(gridEdit);
 			return {
 				...state,
 				toolbar: {
 					...state.toolbar,
-					gridEdit: gridEdit
+					gridEdit: gridEdit,
 				},
 			};
 		}

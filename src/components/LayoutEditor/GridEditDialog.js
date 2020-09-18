@@ -29,10 +29,15 @@ const GridEditDialog = () => {
 		}
 	}, [errors]);
 
+	const saveAndClose = () => {
+		actions.updateSection(section.id, section);
+		actions.closeGridEdit();
+	};
+
 	return (
 		<EditDialog
 			editing={open}
-			setEditing={errorExists ? () => null : () => actions.closeGridEdit()}
+			setEditing={errorExists ? () => null : saveAndClose}
 			title='Edit Grid Size'
 			size='sm'
 		>

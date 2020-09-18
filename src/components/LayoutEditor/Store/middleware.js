@@ -1,14 +1,9 @@
 /* eslint-disable no-redeclare */
-import {
-	SET_STATE,
-	UPDATE_SECTION,
-	UPDATE_SECTION_ORDER,
-	DELETE_SECTION,
-	CLOSE_GRID_EDIT,
-} from './actions';
+import { SET_STATE, UPDATE_SECTION, UPDATE_SECTION_ORDER, DELETE_SECTION } from './actions';
 
 export const applyMiddleware = (state, dispatch) => action => {
 	if (action.type === UPDATE_SECTION) {
+		console.log(action);
 		const { id, section } = action.payload;
 		var newSections = state.sections;
 		for (var [i, _section] of newSections.entries()) {
@@ -55,31 +50,6 @@ export const applyMiddleware = (state, dispatch) => action => {
 			}
 		}
 		dispatch({ type: DELETE_SECTION, payload: { sections: newSections } });
-	} else if (action.type === CLOSE_GRID_EDIT) {
-		console.log('closing');
-		const newSection = state.toolbar.gridEdit.section;
-		var newSections = state.sections;
-		for (var [i, _section] of newSections.entries()) {
-			if (_section.id === newSection.id) {
-				newSections[i] = newSection;
-			}
-		}
-		dispatch({
-			type: SET_STATE,
-			payload: {
-				...state,
-				sections: newSections,
-				toolbar: {
-					...state.toolbar,
-					gridEdit: {
-						...state.toolbar.gridEdit,
-						open: false,
-						section: {},
-						errors: {},
-					},
-				},
-			},
-		});
 	} else {
 		dispatch(action);
 	}
