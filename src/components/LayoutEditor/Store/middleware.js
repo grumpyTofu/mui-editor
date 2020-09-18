@@ -3,7 +3,6 @@ import { SET_STATE, UPDATE_SECTION, UPDATE_SECTION_ORDER, DELETE_SECTION } from 
 
 export const applyMiddleware = (state, dispatch) => action => {
 	if (action.type === UPDATE_SECTION) {
-		console.log(action);
 		const { id, section } = action.payload;
 		var newSections = state.sections;
 		for (var [i, _section] of newSections.entries()) {
