@@ -31,6 +31,7 @@ const contentTypes = {
 		props: {
 			text: 'Click Here',
 			link: '',
+			type: 'external',
 		},
 	},
 	// collection: <Collection />,
@@ -42,7 +43,6 @@ const contentTypes = {
 			link: '',
 		},
 	},
-	// dialog: <Dialog />,
 };
 
 export default contentTypes;

@@ -1,8 +1,24 @@
 import React from 'react';
-import { Button, DialogContentText, TextField } from '@material-ui/core';
+import {
+	Button,
+	DialogContentText,
+	TextField,
+	RadioGroup,
+	FormControlLabel,
+	Radio,
+	FormHelperText,
+} from '@material-ui/core';
 import EditDialog from '../EditDialog';
 
 export default ({ editing, setEditing, updateSection, section }) => {
+	const linkProps =
+		section.props.type === 'external'
+			? {
+					target: '_blank',
+					rel: 'noreferrer noopener',
+			  }
+			: {};
+
 	return (
 		<div
 			style={{
@@ -20,8 +36,7 @@ export default ({ editing, setEditing, updateSection, section }) => {
 				variant='outlined'
 				component='a'
 				href={section.props.link}
-				target='_blank'
-				rel='noreferrer noopener'
+				{...linkProps}
 			>
 				{section.props.text}
 			</Button>
@@ -45,6 +60,34 @@ export default ({ editing, setEditing, updateSection, section }) => {
 						})
 					}
 				/>
+				<RadioGroup
+					row
+					aria-label='link type'
+					name='link type'
+					value={section.props.type}
+					onChange={event =>
+						updateSection(section.id, {
+							...section,
+							props: {
+								...section.props,
+								type: event.target.value,
+							},
+						})
+					}
+				>
+					<FormControlLabel
+						value='external'
+						control={<Radio color='primary' />}
+						label='External Link'
+						labelPlacement='top'
+					/>
+					<FormControlLabel
+						value='internal'
+						control={<Radio color='primary' />}
+						label='Internal Link'
+						labelPlacement='top'
+					/>
+				</RadioGroup>
 				<TextField
 					autoFocus
 					margin='dense'
@@ -61,6 +104,11 @@ export default ({ editing, setEditing, updateSection, section }) => {
 						})
 					}
 				/>
+				<FormHelperText>
+					{section.props.type === 'external'
+						? 'This field should contain an absolute url. ex: https://google.com'
+						: 'This field should contain a relative url. ex: test/url'}
+				</FormHelperText>
 			</EditDialog>
 		</div>
 	);
