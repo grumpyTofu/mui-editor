@@ -19,10 +19,11 @@ const StoreProvider = ({ children }) => {
 
 export { StoreContext, StoreProvider };
 
-const withStore = Component => props => (
-	<StoreProvider>
-		<Component {...props} />
-	</StoreProvider>
-);
+const withStore = Component =>
+	React.forwardRef((props, ref) => (
+		<StoreProvider>
+			<Component {...props} ref={ref} />
+		</StoreProvider>
+	));
 
 export default withStore;
