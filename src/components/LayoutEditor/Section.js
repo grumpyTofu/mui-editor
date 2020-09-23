@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from './Toolbar';
 import ContentType from './ContentType';
 
 export default ({ section }) => {
 	const [toolbar, setToolbar] = useState(null);
-	const [editing, setEditing] = useState(null);
+	const [editing, setEditing] = useState(false);
+
+	useEffect(() => {
+		if (toolbar !== null && editing === false) {
+			setToolbar(null);
+		}
+	}, [editing]);
+
 	return (
 		<Grid
 			container
