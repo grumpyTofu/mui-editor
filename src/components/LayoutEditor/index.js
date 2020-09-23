@@ -5,11 +5,11 @@ import Selector from './Selector';
 import Section from './Section';
 import GridEditDialog from './GridEditDialog';
 
-export default withStore(({ config, output, ...props }) => {
+const MuiEditor = React.forwardRef((props, ref) => {
 	const { state, actions } = useContext(StoreContext);
 
 	const _output =
-		output ||
+		props.output ||
 		function (outputHtml, outputEditorConfig) {
 			console.warn('Please set up an output function.', outputHtml, outputEditorConfig);
 		};
@@ -22,16 +22,16 @@ export default withStore(({ config, output, ...props }) => {
 	};
 
 	useEffect(() => {
-		if (config && state.checkedProps === false) {
+		if (props.config && state.checkedProps === false) {
 			const derivedState = {
-				sectionIdCount: config.sectionIdCount
-					? config.sectionIdCount
-					: config.sections && config.sections.length > 0
-					? config.sections.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1
+				sectionIdCount: props.config.sectionIdCount
+					? props.config.sectionIdCount
+					: props.config.sections && props.config.sections.length > 0
+					? props.config.sections.sort((a, b) => (a.id > b.id ? -1 : 1))[0].id + 1
 					: 0,
 				sections:
-					config.sections && config.sections.length > 0
-						? config.sections.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1))
+					props.config.sections && props.config.sections.length > 0
+						? props.config.sections.sort((a, b) => (a.pageOrder > b.pageOrder ? 1 : -1))
 						: [],
 			};
 			actions.setState(derivedState);
@@ -41,7 +41,7 @@ export default withStore(({ config, output, ...props }) => {
 	return (
 		<React.Fragment>
 			<div ref={editorRef}>
-				<Grid container>
+				<Grid container ref={ref}>
 					{state.sections.length > 0 &&
 						state.sections.map((section, index) => {
 							var styles = { margin: '.5rem 1.5rem' };
@@ -70,3 +70,7 @@ export default withStore(({ config, output, ...props }) => {
 		</React.Fragment>
 	);
 });
+
+const ConnectedMuiEditor = withStore(MuiEditor);
+
+export default React.forwardRef((props, ref) => <ConnectedMuiEditor {...props} ref={ref} />);

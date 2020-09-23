@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Grid, Card } from '@material-ui/core';
 import MuiEditor from 'mui-editor';
 
 const App = () => {
+		const ref = useRef();
     return (
 			<div className='App' >
 				<Grid container justify='center' align='center' >
 					<Grid item xs={10}>
 						<Card className='card'>
-							<MuiEditor config={testData} />
+							<MuiEditor config={testData} ref={ref}/>
 						</Card>
 					</Grid>
 				</Grid>
