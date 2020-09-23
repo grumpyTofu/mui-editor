@@ -14,10 +14,13 @@ export default ({ editing, setEditing, updateSection, section }) => {
 	const linkProps =
 		section.props.type === 'external'
 			? {
+					className: 'mui-editor-external-link',
 					target: '_blank',
 					rel: 'noreferrer noopener',
 			  }
-			: {};
+			: {
+					className: 'mui-editor-internal-link',
+			  };
 
 	return (
 		<div
