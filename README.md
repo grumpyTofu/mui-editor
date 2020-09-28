@@ -70,6 +70,36 @@ export default props => {
 };
 ```
 
+## Additional Styling
+Should any styling inconsistencies occur between the editor and output html of the editor, try using the following css in the index.html file to force styling.
+```css
+        /* Custom CSS for mui-editor */
+        a[class*="mui-editor"] {
+            color: #3f51b5;
+            border: 1px solid rgba(63, 81, 181, 0.5);
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-weight: 500;
+            line-height: 1.75;
+            border-radius: 4px;
+            letter-spacing: 0.02857em;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 3px 9px;
+        }
+
+        a[class*="mui-editor"]:hover {
+            text-decoration: none;
+            border: 1px solid #3f51b5;
+            color: #3f51b5;
+            background-color: rgba(63, 81, 181, 0.04);
+        }
+
+        div.MuiListItemText-root.MuiListItemText-multiline {
+            border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
+            padding-bottom: .75rem;
+        }
+```
+
 ## Text Editor Usage
 
 ```jsx
