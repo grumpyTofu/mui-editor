@@ -41,7 +41,7 @@ const MuiEditor = React.forwardRef((props, ref) => {
 	return (
 		<React.Fragment>
 			<div ref={editorRef}>
-				<Grid container ref={ref}>
+				<Grid container className='mui-editor-container' ref={ref}>
 					{state.sections.length > 0 &&
 						state.sections.map((section, index) => {
 							var styles = { margin: '.5rem 1.5rem' };
